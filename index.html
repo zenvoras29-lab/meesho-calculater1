@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>meesho profit calculator</title>
+    <style>
+body {
+    background-color: #fce4ec;
+    font-family: Arial;
+    text-align: center;
+}
+
+h1 {
+    color: #c2185b;
+}
+
+h2 {
+    color: #880e4f;
+}
+
+input {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+    border: 1px solid pink;
+}
+
+button {
+    background-color: #c2185b;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+input {
+    width: 220px;
+    font-size: 16px;
+    background-color: white;
+}
+
+button:hover {
+    background-color: #880e4f;
+}
+#result {
+    background-color: white;
+    color: #c2185b;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 12px;
+    font-size: 22px;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+</style>
+</head>
+<body>
+    <h1>meesho smart profit calculater</h1>
+    <h2>product details</h2>
+    <label for="">product purchase price rs.</label>
+    <input type="number" id="cost" placeholder="enter product cost">
+    <br><br>
+    <label for="">packing cost</label>
+    <input type="number" id="packing" placeholder="enter packing cost">
+    <br><br>
+    <label for="">poduct weight grams</label>
+    <input type="number" id="weight" placeholder="enter weight in grams">
+    <br><br>
+    <label for="">meesho selling price</label>
+    <input type="number" id="selling" placeholder="enter selling price">
+    <br><br>
+    <h2>meesho charge</h2>
+    <label for="shipping ">shipping charges rs.</label>
+    <input type="number" id="shipping" placeholder="enter shipping charge">
+    <br><br>
+    <label for="">other charges rs.</label>
+    <input type="number" id="other" placeholder="enter other charge">
+    <br><br>
+<button onclick="calculateProfit()">Calculate Profit</button>
+<button onclick="resetCalculator()">Reset</button>
+    <h2 id="result">your profit will appear hear</h2>
+    <br><br>
+
+<label>Target Profit (Rs.)</label>
+<input type="number" id="target" placeholder="Enter target profit">
+<script>
+function calculateProfit() {
+
+    let cost = Number(document.getElementById("cost").value);
+    let packing = Number(document.getElementById("packing").value);
+    let weight = Number(document.getElementById("weight").value);
+    let shipping = Number(document.getElementById("shipping").value);
+    let other = Number(document.getElementById("other").value);
+    let target = Number(document.getElementById("target").value);
+
+    let requiredPrice = cost + packing + shipping + other + target;
+
+    document.getElementById("selling").value = requiredPrice;
+
+    let profit = requiredPrice - cost - packing - shipping - other;
+
+    let percentage = cost > 0 ? (profit / cost) * 100 : 0;
+
+    let result = document.getElementById("result");
+
+    result.innerHTML =
+        "Aapka Profit: ₹" + profit.toFixed(2) +
+        "<br>Meesho Selling Price: ₹" + requiredPrice.toFixed(2) +
+        "<br>Profit Percentage: " + percentage.toFixed(2) + "%";
+
+    if (profit > 50) {
+        result.style.color = "green";
+    } else {
+        result.style.color = "red";
+    }
+}
+
+function resetCalculator() {
+
+    document.getElementById("cost").value = "";
+    document.getElementById("packing").value = "";
+    document.getElementById("weight").value = "";
+    document.getElementById("shipping").value = "";
+    document.getElementById("other").value = "";
+    document.getElementById("target").value = "";
+    document.getElementById("selling").value = "";
+
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").style.color = "";
+}
+</script>
+
+</body>
+</html>
